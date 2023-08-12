@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
         "1005253670", "santihernandez2501@gmail.com",
         cargo2);
 
-    println(empleado1.cargo.salario());
+    println(empleado1.getCargo.salario());
 
     val scanner = Scanner(System.`in`)
 
@@ -85,7 +85,43 @@ fun main(args: Array<String>) {
                             println(empresaSantiagoSas.agregarEmpleado(empleado));
 
                         }
-                        3 -> {println("Opcion3")}
+                        3 -> {println("-Modificar Empleado-")
+                            val scanner3 = Scanner(System.`in`)
+
+                            print("A continucion ingrese la cedula del empleado que desea modificar:")
+                            val cedula: String = scanner3.nextLine()
+                            if (cedula == ""){
+                                break
+                            } else {
+                                val empleado = empresaSantiagoSas.buscarEmpleado(cedula);
+                                if (empleado != null){
+                                    val opcionModificarEmpleado: Int
+                                    println("Se encontro el empleado, estos son los datos que se tienen de el:\n" +
+                                            "1. Nombre: ${empleado.getNombre}\n" +
+                                            "2. Apellido: ${empleado.getApellido}\n" +
+                                            "3. Cedula: ${empleado.getDocumento} [NO MODIFICABLE]\n" +
+                                            "4. Cargo: ${empleado.getCargo.nombre}\n" +
+                                            "5. Salario: ${empleado.getCargo.salario()} [NO MODIFICABLE / DEPENDE DEL CARGO]")
+                                    println("Digite la opcion que desea modificar de este empleado:")
+                                    opcionModificarEmpleado = scanner.nextInt()
+
+                                    when (opcionModificarEmpleado) {
+                                        1->{
+                                            println("Digite el nuevo nombre para este empleado:")
+                                            val nombre: String = scanner3.nextLine()
+                                            val empleadoModificado = Empleado(nombre, empleado.getApellido, empleado.getDocumento, empleado.getCorreo, empleado.getCargo);
+                                            println(empresaSantiagoSas.modificarEmpleado(empleadoModificado));
+                                        }
+                                        2->{}
+                                        3->{}
+                                        4->{}
+                                        5->{}
+                                        else-> println("Opcion invalida")
+                                    }
+                                }
+                            }
+
+                        }
                         4 -> {println("Opcion4")}
                         5 -> println("Volviendo al menu principal...")
                         else -> println("Opción invalida...")

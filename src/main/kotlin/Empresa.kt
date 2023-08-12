@@ -5,22 +5,22 @@ class Empresa (nit: Long,
 
     fun agregarEmpleado(empleado: Empleado):String{
 
-        val empleadoAux: Empleado? = buscarEmpleado(empleado.documento);
+        val empleadoAux: Empleado? = buscarEmpleado(empleado.getDocumento);
 
         if (empleadoAux == null){
             listaDeEmpleados.add(empleado);
-            return "Agregado exitosamente!"
+            return "[Aviso Interno]- Agregado exitosamente!"
         } else {
-            println("Este empleado ya se encuentra registrado!")
+            println("[Aviso Interno]- Este empleado ya se encuentra registrado!")
         }
-        return "Sucedio un error inesperado agregando el empleado..."
+        return "[Aviso Interno]- Sucedio un error inesperado agregando el empleado..."
     }
 
     fun buscarEmpleado(cedula: String): Empleado?{
 
         if (!listaDeEmpleados.isEmpty()){
             for (empleado in listaDeEmpleados){
-                if (empleado.documento.equals(cedula)){
+                if (empleado.getDocumento.equals(cedula)){
                     return empleado;
                 }
             }
@@ -36,13 +36,47 @@ class Empresa (nit: Long,
             for (empleado in listaDeEmpleados){
 
                 empleados += "[$aumentador] - ${empleado.getNombre} ${empleado.getApellido}, " +
-                        "Cargo: ${empleado.cargo.nombre}, Salario: ${empleado.cargo.salario()} \n"
+                        "Cargo: ${empleado.getCargo.nombre}, Salario: ${empleado.getCargo.salario()} \n"
                 aumentador++;
             }
         return empleados;
         } else {
-            return "No hay empleados para mostrar"
+            return "[Aviso Interno]- No hay empleados para mostrar"
         }
+    }
+
+    fun modificarEmpleado(empleado: Empleado): String{
+
+        val empleadoModificar: Empleado? = buscarEmpleado(empleado.getDocumento);
+
+        if (empleadoModificar != null){
+            empleadoModificar.setNombre = empleado.getNombre;
+            empleadoModificar.setApellido = empleado.getApellido;
+            empleadoModificar.setCorreo = empleado.getCorreo;
+            empleadoModificar.setCargo = empleado.getCargo;
+
+           return "[Aviso Interno]- Empleado modificado exitosamente!"
+        }
+
+        return "[Error Interno]- Sucedio un error al intentar modificar el empleado"
+    }
+
+    fun eliminarEmpleado(cedula: String): String{
+
+        if (listaDeEmpleados.isNotEmpty()){
+
+            for (empleado in listaDeEmpleados){
+
+                if (empleado.getDocumento.equals(cedula)){
+                    listaDeEmpleados.remove(empleado);
+                    return "[Aviso Interno]- Se elimino el empleado ${empleado.getNombre}";
+                }
+            }
+        } else {
+            return  "[Error Interno]- No hay empleados registrados por eliminar"
+        }
+
+        return "[Error Interno]- Ha sucedido un error al intentar ejecutar el metodo Eliminar"
     }
 
 }

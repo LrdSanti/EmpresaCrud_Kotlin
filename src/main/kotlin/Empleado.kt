@@ -5,8 +5,8 @@ String, documento: String, correo: String, cargo: Cargo ){
 
     fun agregarEmpleadoSubordinado(empleado: Empleado){
 
-        if (!empleado.documento.equals(this.documento)){
-            if (buscarEmpleadoSubordinado(empleado.documento) == null){
+        if (!empleado.getDocumento.equals(this.getDocumento)){
+            if (buscarEmpleadoSubordinado(empleado.getDocumento) == null){
             listaDeEmpleadosSubordinados.add(empleado);
             }
         }
@@ -14,7 +14,7 @@ String, documento: String, correo: String, cargo: Cargo ){
 
     fun buscarEmpleadoSubordinado(cedula: String): Empleado?{
         for (empleadoSubordinado in listaDeEmpleadosSubordinados){
-            if (empleadoSubordinado.documento.equals(cedula)){
+            if (empleadoSubordinado.getDocumento.equals(cedula)){
                 return empleadoSubordinado
             }
         }
@@ -22,7 +22,9 @@ String, documento: String, correo: String, cargo: Cargo ){
         return null;
     }
 
-    var cargo: Cargo =cargo
+
+
+    var getCargo: Cargo =cargo
         get(){
             return field;
         }
@@ -33,7 +35,7 @@ String, documento: String, correo: String, cargo: Cargo ){
         }
 
 
-    var documento: String = documento
+    var getDocumento: String = documento
 
         get(){
             return field;
@@ -57,6 +59,17 @@ String, documento: String, correo: String, cargo: Cargo ){
         }
 
     var setApellido: String = apellido
+        set(value){
+            field = value
+        }
+
+    var getCorreo: String = correo
+
+        get(){
+            return field;
+        }
+
+    var setCorreo: String = correo
         set(value){
             field = value
         }
